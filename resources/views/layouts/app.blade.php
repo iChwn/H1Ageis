@@ -39,7 +39,7 @@
                         &nbsp;
                         @role('admin') 
                         <li> <a href="{{route('admins.index')}}"> 
-                            <i class="fa fa-btn fa-pencil"></i> Admin </a> </li>
+                            <i class="fa fa-btn fa-pencil"></i> Member </a> </li>
                             @endrole 
                         </ul>
 
@@ -74,7 +74,7 @@
                 </div>
             </div>
         </nav>
-
+        @include('layouts._flash')
         @yield('content')
     </div>
 

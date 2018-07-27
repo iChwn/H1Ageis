@@ -13,6 +13,7 @@
 Route::group(['prefix'=>'admin', 'middleware'=>['auth']], function () {
 Route::resource('admins', 'AdminsController');
 });
+Route::get('auth/verify/{token}', 'Auth\RegisterController@verify');
 
 Route::get('/test','AdminsController@test');
 Route::get('/', function () {

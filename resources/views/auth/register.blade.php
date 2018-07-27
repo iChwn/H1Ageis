@@ -1,65 +1,76 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
-@section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel "style="background-color: rgba(255,255,255,0.9);">
-                <div class="panel-heading">Register</div>
-                <div class="panel-body">
-                    {!! Form::open(['url'=>'register','class'=>'form-horizontal']) !!}
+@section('konten')
+<div class="m-grid__item m-grid__item--fluid m-login__wrapper">
+    <div class="m-login__container">
 
-                    <div class="form-group{{$errors->has('name')?'has-error':''}}">
-                        {!! Form::label('name','Nama',['class'=>'col-md-4 control-label'])!!}
-                        <div class="col-md-6">
-                            {!! Form::text('name',null,['class'=>'form-control']) !!}
-                            {!! $errors->first('name','<p class="help-block">:message</p>') !!}
-                        </div>                            
-                    </div>
-
-                    <div class="form-group{{$errors->has('email')?'has-error':''}}">
-                        {!! Form::label('email','Alamat Email',['class'=>'col-md-4 control-label'])!!}
-                        <div class="col-md-6">
-                            {!! Form::email('email',null,['class'=>'form-control']) !!}
-                            {!! $errors->first('email','<p class="help-block">:message</p>') !!}
-                        </div>
-                    </div>
-
-                    <div class="form-group{{$errors->has('password')?'has-error':''}}">
-                        {!! Form::label('password','Password',['class'=>'col-md-4 control-label'])!!}
-                        <div class="col-md-6">
-                            {!! Form::password('password',['class'=>'form-control']) !!}
-                            {!! $errors->first('password','<p class="help-block">:message</p>') !!}
-                        </div>
-                    </div>
-
-                    <div class="form-group {{$errors->has('password_confirmation')?'has-error':''}}">
-                        {!! Form::label('password_confirmation','Konfirmasi Password',['class'=>'col-md-4 control-label'])!!}
-                        <div class="col-md-6">
-                            {!! Form::password('password_confirmation',['class'=>'form-control']) !!}
-                            {!! $errors->first('password_confirmation','<p class="help-block">:message</p>') !!}
-                        </div>
-                    </div>
-
-                    <div class="form-group{{ $errors->has('g-recaptcha-response') ? ' has-error' : '' }}">
-                        <div class="col-md-offset-4 col-md-6">
-                            {!! app('captcha')->display() !!}
-                            {!! $errors->first('g-recaptcha-response', '<p class="help-block">:message</p>') !!}
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="col-md-6 col-md-offset-4">
-                            <button type="submit" class="btn btn-primary">
-                                <i class="fa fa-btn fa-user-plus"></i> Daftar
-                            </button>
-                        </div>
-                    </div>
-                    {!! Form::close() !!}
-
-                </div>
+       
+        <div class="m-login__head">
+            <h3 class="m-login__title">
+                Sign Up
+            </h3>
+            <div class="m-login__desc">
+                Enter your details to create your account:
             </div>
         </div>
+
+        {!! Form::open(['url'=>'register','class'=>'m-login__form m-form']) !!}
+        <div class="form-group m-form__group{{$errors->has('name')?'has-error':''}}">
+            <input class="form-control m-input" type="text" placeholder="Nama" name="name">
+            {!! $errors->first('name','<p class="help-block">:message</p>') !!}
+        </div>
+        <div class="form-group m-form__group{{$errors->has('email')?'has-error':''}}">
+            <input class="form-control m-input" type="text" placeholder="Email" name="email" autocomplete="off">
+            {!! $errors->first('email','<p class="help-block">:message</p>') !!}
+        </div>
+        <div class="form-group m-form__group{{$errors->has('password')?'has-error':''}}">
+            <input class="form-control m-input" type="password" placeholder="Password" name="password">
+            {!! $errors->first('password','<p class="help-block">:message</p>') !!}
+        </div>
+        <div class="form-group m-form__group{{$errors->has('password_confirmation')?'has-error':''}}">
+            <input class="form-control m-input m-login__form-input--last" type="password" placeholder="Confirm Password" name="password_confirmation">
+            {!! $errors->first('password_confirmation','<p class="help-block">:message</p>') !!}
+        </div>
+        <p></p>
+        <div class="form-group m-form__group{{$errors->has('g-recaptcha-response')?'has-error':''}}">
+            <center>
+                {!! app('captcha',['class'=>'col-md-6'])->display() !!}
+                {!! $errors->first('g-recaptcha-response', '<p class="help-block">:message</p>') !!}
+            </center>
+        </div>
+               {{--  <div class="row form-group m-form__group m-login__form-sub">
+                    <div class="col m--align-left">
+                        <label class="m-checkbox m-checkbox--light">
+                            <input type="checkbox" name="agree">
+                            I Agree the
+                            <a href="#" class="m-link m-link--focus">
+                                terms and conditions
+                            </a>
+                            .
+                            <span></span>
+                        </label>
+                        <span class="m-form__help"></span>
+                    </div>
+                </div> --}} 
+                {{-- Accept Aggrement --}}
+                <div class="m-login__form-action">
+                    <button class="btn m-btn m-btn--pill m-btn--custom m-btn--air m-login__btn m-login__btn--primary">
+                        Sign Up
+                    </button>
+                    &nbsp;&nbsp;
+                    <button id="m_login_signup_cancel" class="btn m-btn m-btn--pill m-btn--custom m-btn--air m-login__btn">
+                        Cancel
+                    </button>
+                </div>
+                {!! Form::close() !!}
+
+            </div>
+
+        </div>
+
     </div>
 </div>
+
+
 @endsection
+

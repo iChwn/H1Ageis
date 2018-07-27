@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Config;
+use App\User;
 
 class AdminsController extends Controller
 {
@@ -14,7 +15,8 @@ class AdminsController extends Controller
      */
     public function index()
     {
-        //
+        $data = User::all();
+        return view('Admin.index')->with(compact('data'));
     }
 
     /**

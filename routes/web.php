@@ -24,3 +24,5 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/chart','ChartsController@chart');
+Route::get('/table','ChartsController@table');
+Route::get('/list','ChartsController@list_data');

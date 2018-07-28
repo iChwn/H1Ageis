@@ -166,6 +166,7 @@ return [
         Laratrust\LaratrustServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Anhskohbo\NoCaptcha\NoCaptchaServiceProvider::class,
+        Yajra\Datatables\DatatablesServiceProvider::class
         /*
          * Package Service Providers...
          */
@@ -230,6 +231,7 @@ return [
     'Laratrust'=> Laratrust\LaratrustFacade::class,
     'Form' => Collective\Html\FormFacade::class,
     'Html' => Collective\Html\HtmlFacade::class,
+    'Datatables' => Yajra\Datatables\Facades\Datatables::class,
     ],
 
     ];

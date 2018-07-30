@@ -88,7 +88,6 @@ class RegisterController extends Controller
                 "level" => "success",
                 "message" => "Berhasil melakukan verifikasi."
                 ]);
-            Auth::login($user);
         }
         return redirect('/login');
     }

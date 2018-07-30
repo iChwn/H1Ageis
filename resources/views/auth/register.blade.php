@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('Admin.login-parent')
 
 @section('konten')
 <div class="m-grid__item m-grid__item--fluid m-login__wrapper">

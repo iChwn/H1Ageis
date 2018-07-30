@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Role;
+use Illuminate\Support\Facades\Session;
+Use Illuminate\Support\Facades\Mail;
 
 class MembersController extends Controller
 {
@@ -25,7 +28,7 @@ class MembersController extends Controller
      */
     public function create()
     {
-        //
+        return view ('User.create');
     }
 
     /**
@@ -36,7 +39,27 @@ class MembersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'name'  => 'required',
+            'email' => 'required|email'
+        ]);
+        $password           = str_random(6);
+        $data               = $request->all();
+        $data['password']   = bcrypt($password);
+        $data['is_verified']= 1;
+
+        $member = User::create($data);
+        $member->sendVerification();
+
+        //SetRole
+        $memberRole         = Role::where('name','member')->first();
+        $member->attachRole($memberRole);
+
+        //sendMail
+        Mail::send('auth.emails.invite',compact('member','password'), function ($m) use ($member){
+            $m->to($member->email, $member->name)->subject('Anda Telah di Daftarkan oleh Admin Kami:)');
+        });
+        return redirect()->route('member.index')->with('alert-success', 'Berhasil menambahkan member '.$data['email'].' dengan Password '.$password);
     }
 
     /**

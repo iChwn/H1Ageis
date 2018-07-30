@@ -15,44 +15,31 @@
 			<div class="m-portlet__head-caption">
 				<div class="m-portlet__head-title">
 					<h3 class="m-portlet__head-text">
-						Tambah Data Penjualan
+						Tambah User
 					</h3>
 				</div>
 			</div>
 		</div>
 		<div class="m-portlet__body">
-			<form class="m-form m-form--fit m-form--label-align-right" action="{{action('ChartsController@store')}}">
+			<form class="m-form m-form--fit m-form--label-align-right" action="{{route('member.store')}}" method="post">
+				{{ csrf_field('POST') }}
 				<div class="m-portlet__body">
 					<div class="form-group m-form__group">
-						<label for="transaksi">
-							Transaksi
+						<label for="name">
+							Nama
 						</label>
-						<input type="number" class="form-control m-input" id="transaksi" aria-describedby="emailHelp" name="transaksi" placeholder="Transaksi">
+						<input type="text" class="form-control m-input" id="name" aria-describedby="name" name="name" placeholder="Nama Lengkap">
 						<span class="m-form__help">
-							{!! $errors->first('transaksi','<p class="help-block">:message</p>') !!}
+							{!! $errors->first('name','<p class="help-block">:message</p>') !!}
 						</span>
 					</div>
 					<div class="form-group m-form__group">
-						<label for="bulan">
-							Bulan
+						<label for="email">
+							Email
 						</label>
-						<select class="form-control m-input" name="bulan" id="bulan">
-							<option></option>
-							<option>January</option>
-							<option>February</option>
-							<option>March</option>
-							<option>April</option>
-							<option>May</option>
-							<option>June</option>
-							<option>July</option>
-							<option>August</option>
-							<option>September</option>
-							<option>October</option>
-							<option>November</option> 
-							<option>December</option> 
-						</select>
+						<input type="email" class="form-control m-input" id="email" aria-describedby="email" name="email" placeholder="Email">
 						<span class="m-form__help">
-							{!! $errors->first('bulan','<p class="help-block">:message</p>') !!}
+							{!! $errors->first('email','<p class="help-block">:message</p>') !!}
 						</span>
 					</div>
 				</div>

@@ -2,8 +2,8 @@
 	Halo {{ $member->name }}.
 </p>
 <p>
-	Admin kami telah mendaftarkan email Anda ({{ $member->email }}) ke Larapus. Untuk login,
-	silahkan kunjungi <a href="{{ $login = url('login') }}">{{ $login }}</a>. Login dengan email
+	Admin kami telah mendaftarkan email Anda ({{ $member->email }}). Untuk login,
+	silahkan <h5><b><u>Vertivikasi Terlebih Dahulu Email Anda.</u></b></h5> Lalu kunjungi <a href="{{ $login = url('login') }}">{{ $login }}</a>. Login dengan email
 	Anda dan password <strong>{{ $password }}</strong>.
 </p>
 <p>

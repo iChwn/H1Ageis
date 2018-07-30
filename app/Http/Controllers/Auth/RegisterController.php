@@ -70,8 +70,8 @@ class RegisterController extends Controller
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' => bcrypt($data['password']),
             'g-recaptcha-response' => 'required|captcha',
+            'password' => bcrypt($data['password']),
             ]);
         $memberRole = Role::where('name', 'member')->first();
         $user->attachRole($memberRole);
@@ -84,11 +84,7 @@ class RegisterController extends Controller
         $user = User::where('verification_token', $token)->where('email', $email)->first();
         if ($user) {
             $user->verify();
-            Session::flash("flash_notification", [
-                "level" => "success",
-                "message" => "Berhasil melakukan verifikasi."
-                ]);
         }
-        return redirect('/login');
+        return redirect('/login')->with('alert-success','Anda Berhasil Melakukan Vertivikasi:)');
     }
 }

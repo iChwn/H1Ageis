@@ -34,7 +34,7 @@
         <p></p>
         <div class="form-group m-form__group{{$errors->has('g-recaptcha-response')?'has-error':''}}">
             <center>
-                {!! app('captcha',['class'=>'col-md-6'])->display() !!}
+                {!! app('captcha',['class'=>'col-md-12'])->display() !!}
                 {!! $errors->first('g-recaptcha-response', '<p class="help-block">:message</p>') !!}
             </center>
         </div>
@@ -58,9 +58,9 @@
                         Sign Up
                     </button>
                     &nbsp;&nbsp;
-                    <button id="m_login_signup_cancel" class="btn m-btn m-btn--pill m-btn--custom m-btn--air m-login__btn">
+                    <a href="{{URL('login')}}" class="btn m-btn m-btn--pill m-btn--custom m-btn--air m-login__btn">
                         Cancel
-                    </button>
+                    </a>
                 </div>
                 {!! Form::close() !!}
 

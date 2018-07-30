@@ -81,7 +81,8 @@ class MembersController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data1 = User::where('id',$id)->get();
+        return view ('User.edit')->with(compact('data1'));
     }
 
     /**
@@ -93,7 +94,9 @@ class MembersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = User::where('id',$id);
+        $data -> update($request->only('name','email'));
+        return redirect()->route('member.index')->with('alert-success','Berhasil Mengedit Member');
     }
 
     /**

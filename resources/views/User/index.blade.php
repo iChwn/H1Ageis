@@ -123,7 +123,7 @@
 							<form action="{{ route('member.destroy', $key->id) }}" method="post">
 								{{ csrf_field() }}
 								{{ method_field('DELETE') }}
-								<a class="btn m-btn m-btn--gradient-from-primary m-btn--gradient-to-accent" href="{{URL('admin/user/edit',$key->id)}}">Edit</a>
+								<a class="btn m-btn m-btn--gradient-from-primary m-btn--gradient-to-accent" href="{{route('member.edit',$key->id)}}">Edit</a>
 								<button class="btn m-btn m-btn--gradient-from-danger m-btn--gradient-to-accent" type="submit" onclick="return confirm('Yakin ingin menghapus data?')">Delete</button>
 							</form>
 						</td>

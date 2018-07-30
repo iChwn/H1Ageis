@@ -8,14 +8,34 @@
 	 {!! $chart->script() !!}
 
 	<div class="m-content">
-		<div class="m-alert m-alert--icon m-alert--air m-alert--square alert alert-dismissible m--margin-bottom-30" role="alert">
+		@if(Session::has('alert-success'))
+		<div class="m-alert m-alert--icon m-alert--icon-solid m-alert--outline alert alert-brand alert-dismissible fade show" role="alert">
 			<div class="m-alert__icon">
-				<i class="flaticon-exclamation m--font-brand"></i>
+				<i class="flaticon-exclamation-1"></i>
+				<span></span>
 			</div>
 			<div class="m-alert__text">
-				The Metronic Datatable component supports initialization from HTML table. It also defines the schema model of the data source. In addition to the visualization, the Datatable provides built-in support for operations over data such as sorting, filtering and paging performed in user browser(frontend).
+				<strong> {{ \Illuminate\Support\Facades\Session::get('alert-success') }}</strong>
+			</div>
+			<div class="m-alert__close">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
 			</div>
 		</div>
+		@endif
+		@if(Session::has('alert-danger'))
+		<div class="m-alert m-alert--icon m-alert--icon-solid m-alert--outline alert alert-danger alert-dismissible fade show" role="alert">
+			<div class="m-alert__icon">
+				<i class="flaticon-exclamation-1"></i>
+				<span></span>
+			</div>
+			<div class="m-alert__text">
+				<strong> {{ \Illuminate\Support\Facades\Session::get('alert-danger') }}</strong>
+			</div>
+			<div class="m-alert__close">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
+			</div>
+		</div>
+		@endif
 		<div class="m-portlet m-portlet--mobile">
 			<div class="m-portlet__head">
 				<div class="m-portlet__head-caption">
@@ -25,14 +45,13 @@
 						</h3>
 					</div>
 				</div>
-				 
 			</div>
 			<div class="m-portlet__body">
 				<div class="m-form m-form--label-align-right m--margin-top-20 m--margin-bottom-30">
 					<div class="row align-items-center">
 						<div class="col-xl-8 order-2 order-xl-1">
 							<div class="form-group m-form__group row align-items-center">
-								<div class="col-md-4">
+								{{-- <div class="col-md-4">
 									<div class="m-form__group m-form__group--inline">
 										<div class="m-form__label">
 											<label>
@@ -83,7 +102,7 @@
 										</div>
 									</div>
 									<div class="d-md-none m--margin-bottom-10"></div>
-								</div>
+								</div> --}}
 								<div class="col-md-4">
 									<div class="m-input-icon m-input-icon--left">
 										<input type="text" class="form-control m-input" placeholder="Search..." id="generalSearch">
@@ -97,7 +116,7 @@
 							</div>
 						</div>
 						<div class="col-xl-4 order-1 order-xl-2 m--align-right">
-							<a href="#" class="btn btn-primary m-btn m-btn--custom m-btn--icon m-btn--air m-btn--pill">
+							<a href="{{URL('admin/chart/create')}}" class="btn btn-primary m-btn m-btn--custom m-btn--icon m-btn--air m-btn--pill">
 								<span>
 									<i class="flaticon-plus"></i>
 									<span>
@@ -126,7 +145,7 @@
 							<td>{{$key->bulan}}</td>
 							<td>{{$key->transaksi}}</td>
 							<td>
-								<a class="btn m-btn m-btn--gradient-from-primary m-btn--gradient-to-accent" href="{{URL('/chart/delete/',$key->id)}}">Edit</a>
+								<a class="btn m-btn m-btn--gradient-from-primary m-btn--gradient-to-accent" href="{{URL('admin/chart/edit',$key->id)}}">Edit</a>
 								<a href="{{action('ChartsController@hapus',$key->id)}}" class="btn m-btn m-btn--gradient-from-danger m-btn--gradient-to-accent" onclick="return confirm('Yakin Ingin Menghapus Data?')">Delete</a>
 							</td>
 						</tr>

@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Config;
 use App\User;
 
-class AdminsController extends Controller
+class MembersController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -82,11 +81,8 @@ class AdminsController extends Controller
      */
     public function destroy($id)
     {
-        //
-    }
+        User::destroy($id);
+        return redirect()->back()->with('alert-danger','Berhasil Menghapus Data!');
 
-    public function test()
-    {
-        dd(config('mail.MAIL_HOST'));
     }
 }

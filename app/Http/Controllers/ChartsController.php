@@ -10,8 +10,10 @@ use Yajra\Datatables\Datatables;
 
 class ChartsController extends Controller
 {
+
     public function chart()
     {
+    	$data = Perhitungan::all();
     	$this_data = [
     		$this->getByMonth('January'),
     		$this->getByMonth('February'),
@@ -29,7 +31,7 @@ class ChartsController extends Controller
     	$chart = new SampleChart;
     	$chart->dataset('Sample','line',$this_data)
     	-> options(['borderColor'=>'#ff0000']);
-    	return view('chart_view',['chart'=>$chart]);
+    	return view('Chart.chart_view',['chart'=>$chart])->with(compact('data'));
     }
 
     public function getByMonth($month)
@@ -52,6 +54,45 @@ class ChartsController extends Controller
     		   		return '<a class="btn btn-primary btn-sm" href="/delete/'.$this_model->id.'">Action</a>';
     		   })
     		   ->make(true);
+    }
+
+    public function create()
+	{
+		return view('Chart.create');	
+	}
+
+	public function store(Request $request)
+	{
+		$this->validate($request,[
+			'transaksi' => 	'required',
+			'bulan'		=>	'required'
+			]);
+		$data = new Perhitungan();
+		$data->transaksi = $request->transaksi;
+		$data->bulan = $request->bulan;
+		$data->save();
+		return redirect()->route('chart.index')->with('alert-success','Berhasil Menambahkan Data!');
+	}
+
+	public function edit($id)
+	{
+		$data = Perhitungan::where('id',$id)->get();
+		return view ('Chart.edit')->with(compact('data'));
+	}
+
+	public function update(Request $request,$id)
+	{
+		$data = Perhitungan::where('id',$id)->first();
+		$data->transaksi = $request->transaksi;
+		$data->bulan = $request->bulan;
+		$data->save();
+		return redirect()->route('chart.index')->with('alert-success','Berhasil Mengedit Data!');
+	}
+
+    public function hapus($id)
+    {
+    	Perhitungan::destroy($id);
+    	return redirect()->back()->with('alert-danger','Berhasil Menghapus Data!');
 
     }
 }

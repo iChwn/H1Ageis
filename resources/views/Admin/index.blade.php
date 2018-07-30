@@ -19,13 +19,9 @@
 					<td>{{ $member->name }}</td>
 					<td>{{ $member->email }}</td>
 					@if($member->is_verified == 1)
-					{
 					<td>Aktiv</td>
-					}
 					@else
-					{
 					<td>Non</td>
-					}
 					@endif
 					<td>
 						<form action="{{ route('admins.destroy', $member->id) }}" method="post">

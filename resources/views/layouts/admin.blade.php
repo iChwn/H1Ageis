@@ -41,7 +41,7 @@ License: You must have a valid license purchased only from themeforest(the above
 </head>
 <!-- end::Head -->
 <!-- end::Body -->
-<body  class="m-page--fluid m--skin- m-content--skin-light2 m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default"  >
+<body  class="m-page--fluid m--skin- m-content--skin-light2 m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default" on >
     <!-- begin:: Page -->
     <div class="m-grid m-grid--hor m-grid--root m-page">
         <!-- BEGIN: Header -->
@@ -557,6 +557,16 @@ License: You must have a valid license purchased only from themeforest(the above
                                     Table
                                 </span>
                             </span>
+                        </li>
+                        <li class="m-menu__item " aria-haspopup="true" >
+                            <a  href="{{route('penjualan.index')}}" class="m-menu__link ">
+                                <i class="m-menu__link-bullet m-menu__link-bullet--dot">
+                                    <span></span>
+                                </i>
+                                <span class="m-menu__link-text">
+                                    Penjualan
+                                </span>
+                            </a>
                         </li>
                         <li class="m-menu__item " aria-haspopup="true" >
                             <a  href="{{route('member.index')}}" class="m-menu__link ">
@@ -1368,6 +1378,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <script src="{{asset('js/html-table.js')}}" type="text/javascript"></script>
 <script src="{{asset('js/sweetalert2.js')}}" type="text/javascript"></script>
 <script src="{{asset('js/form-controls.js')}}" type="text/javascript"></script>
+<script src="{{asset('js/bootstrap-datepicker.js')}}" type="text/javascript"></script>
 <!--end::Base Scripts -->   
 <!--begin::Page Snippets -->
 <script src="{{asset('js/login.js')}}" type="text/javascript"></script>

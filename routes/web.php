@@ -34,4 +34,9 @@ Route::get('/chart/store','ChartsController@store');
 Route::get('/chart/edit/{id}','ChartsController@edit');
 Route::get('/chart/update/{id}','ChartsController@update');
 Route::get('/chart/delete/{id}','ChartsController@hapus');
+//AjaxCRUD
+Route::get('my-posts','PostsController@mypost');
+Route::resource('posts','PostsController');
+//Penjualan
+Route::resource('penjualan','PenjualansController');
 });

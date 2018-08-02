@@ -80,7 +80,11 @@ class PenjualansController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
+        $data = Penjualan::where('id',$id)->first();
+        $data->penjualan = $request->penjualan;
+        $data->tanggal = $request->tanggal;
+        $data->save();
+        return redirect()->route('penjualan.index')->with('alert-success','Berhasil Menambahkan Data!');
     }
 
     /**

@@ -122,6 +122,11 @@
 					<option value="11">November</option> 
 					<option value="12">Desember</option> 
 				</select>
+				<select class="btn btn-success dropdown-toggle" name="tipe">
+					<option>Tipe</option>
+					<option value="line">Line</option>
+					<option value="bar">Bar</option>
+				</select>
 			</div>
 			<div id="chart">
 			</div>
@@ -154,6 +159,7 @@
 <script type="text/javascript">
 	$('[name=tahun]').change(function(){
 		$('[name=bulan]').val('01').trigger('change');
+		$('[name=tipe]').val('line').trigger('change');
 		$.get('{{url('/admin/penjualandatatable')}}'+'/'+$(this).val()+'/01',function(data){
 			return chartCtrl(data)
 		})  
@@ -164,12 +170,11 @@
 			return chartCtrl(data)
 		})  
 	})
-
 	function getDaysInMonth(year,month){
 		return new Date(year,month,0).getDate();
 	}
 	function chartCtrl(data){
-
+		var tipe = $('[name=tipe]').val();
 		var days       = getDaysInMonth(2018,01);
 		var categories = [];
 		for(var i = 1; i <= days; i++){
@@ -178,7 +183,7 @@
 
 		var options = {
 			chart: {
-				type: 'bar'
+				type: tipe
 			},
 			series: [{
 				name: 'sales',

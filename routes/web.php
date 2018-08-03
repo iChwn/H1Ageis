@@ -14,6 +14,7 @@
 Route::get('auth/verify/{token}', 'Auth\RegisterController@verify');
 
 Route::get('/test','AdminsController@test');
+Route::get('/test/{year}/{month}','AdminsController@selectData');
 Route::get('/', function () {
     return view('welcome');
 });

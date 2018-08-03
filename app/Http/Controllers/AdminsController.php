@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Config;
 use App\User;
+use App\Penjualan;
 
 class AdminsController extends Controller
 {
@@ -87,6 +88,31 @@ class AdminsController extends Controller
 
     public function test()
     {
-        dd(config('mail.MAIL_HOST'));
+        $bulan = 2;
+        $tahun = 2018;
+        $number = cal_days_in_month(CAL_GREGORIAN, $bulan, $tahun); // 31
+       
+
+        for ($i=1; $i <$number ; $i++) { 
+            echo $i;
+        }
+         return $i;
+    }
+
+    public function selectData($year,$month)
+    {
+        $calendar = cal_days_in_month(CAL_GREGORIAN, $month, $year);
+        $cat_data = array();
+        for($i=1;$i<=$calendar;$i++){
+            $tgl = $year.'-'.$month.'-'.($i+00);
+            $cat_data[] = $this->countByDay($year,$month,$tgl);
+        }
+        return $cat_data;
+    }
+    
+    public function countByDay($year,$month,$tgl)
+    {
+        $this_ = Penjualan::whereYear('tanggal',$year)->whereMonth('tanggal',$month)->where('tanggal',$tgl)->count();
+        return $this_;
     }
 }

@@ -70,10 +70,11 @@
 									</span>
 								</span>
 							</a>
-							<div class="m-separator m-separator--dashed d-xl-none"></div>
+							<div class="m-separator m-separastor--dashed d-xl-none"></div>
 						</div>
 					</div>
 				</div>
+				<div id="chart_div"></div>
 				<table class="m-datatable" id="table_penjualan" width="100%">
 					<thead>
 						<tr>
@@ -105,29 +106,80 @@
 			</div>
 		</div>
 	</div>
-
-	
-	<script src="{{asset('js/Chart.min.js')}}" charset="utf-8"></script>
 	<script type="text/javascript" src="{{asset('js/jquery-3.3.1.min.js')}}"></script>
-
+	<script type="text/javascript" src="{{asset('js/gchart.js')}}"></script>
 	<script type="text/javascript">
-		$(function() {
-			var oTable = $('#table_penjualan').DataTable({
-				processing: true,
-				serverSide: true,
-				ajax: {
-					url: '{{ url("list") }}'
-				},
-				columns: [
-				{data: 'id', name: 'id'},
-				{data: 'tanggal', name: 'tanggal'},
-				{data: 'penjualan', name: 'penjualan'},
-				{data: 'action', name: 'action'},
-				{data: 'test', name: 'test'},
-				],
-			});
+
+      // Load the Visualization API and the corechart package.
+      google.charts.load('current', {'packages':['corechart']});
+
+      // Set a callback to run when the Google Visualization API is loaded.
+      google.charts.setOnLoadCallback(drawChart);
+
+      // Callback that creates and populates a data table,
+      // instantiates the pie chart, passes in the data and
+      // draws it.
+      $('[name=tahun]').change(function(){
+		$('[name=bulan]').val('01').trigger('change');
+		$('[name=tipe]').val('line').trigger('change');
+		$.get('{{url('/admin/penjualandatatable/2018')}}'+(this).val()+'/01',function(data){
+			return drawChart(data)
+		})  
+	})
+	$('[name=bulan]').change(function(){
+		var tahun = $('[name=tahun]').val();
+		$.get('{{url('/admin/penjualandatatable')}}'+'/'+tahun+'/'+$(this).val(),function(data){
+			return drawChart(data)
+		})  
+	})
+      function getDaysInMonth(year,month){
+      	return new Date(year,month,0).getDate();
+      }
+
+      function drawChart(data) {
+      	var tipe = $('[name=tipe]').val();
+		var days       = getDaysInMonth(2018,01);
+		var categories = [];
+		for(var i = 1; i <= days; i++){
+			categories.push(i);
+		}
+        // Create the data table.
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Topping');
+        data.addColumn('string', 'Slices');
+        data.addRows([
+        	[categories, data]
+        	]);
+
+        // Set chart options
+        var options = {'title':'How Much Pizza I Ate Last Night',
+        'width':800,
+        'height':600};
+
+        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+    }
+</script>
+
+<script type="text/javascript">
+	$(function() {
+		var oTable = $('#table_penjualan').DataTable({
+			processing: true,
+			serverSide: true,
+			ajax: {
+				url: '{{ url("list") }}'
+			},
+			columns: [
+			{data: 'id', name: 'id'},
+			{data: 'tanggal', name: 'tanggal'},
+			{data: 'penjualan', name: 'penjualan'},
+			{data: 'action', name: 'action'},
+			{data: 'test', name: 'test'},
+			],
 		});
-	</script>
+	});
+</script>
  </body>
 </html>
 @endsection

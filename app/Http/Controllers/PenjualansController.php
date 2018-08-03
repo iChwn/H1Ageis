@@ -127,11 +127,9 @@ class PenjualansController extends Controller
             $tgl = $year.'-'.$month.'-'.($i+00);
             $cat_data[] = $this->countByDay($year,$month,$tgl);
         }
-
         return $cat_data;
-   
-
     }
+    
     public function countByDay($year,$month,$tgl)
     {
         $this_ = Penjualan::whereYear('tanggal',$year)->whereMonth('tanggal',$month)->where('tanggal',$tgl)->count();

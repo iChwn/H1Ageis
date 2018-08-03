@@ -35,7 +35,8 @@ License: You must have a valid license purchased only from themeforest(the above
     <!--begin::Page Vendors -->
     <link href="{{asset('css/vendors.bundle.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('css/style.bundle.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('css/fullcalendar.bundle.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('css/fullcalendar.bundle.css')}}" rel="stylesheet" type="text/css"/>
+ 
     <!--end::Base Styles -->
     <link rel="shortcut icon" href="../../../assets/demo/default/media/img/logo/favicon.ico" />
 </head>
@@ -565,6 +566,16 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </i>
                                 <span class="m-menu__link-text">
                                     Penjualan
+                                </span>
+                            </a>
+                        </li>
+                        <li class="m-menu__item " aria-haspopup="true" >
+                            <a  href="{{action('PenjualansController@penjualandatatable')}}" class="m-menu__link ">
+                                <i class="m-menu__link-bullet m-menu__link-bullet--dot">
+                                    <span></span>
+                                </i>
+                                <span class="m-menu__link-text">
+                                    Penjualan-Datatablechart
                                 </span>
                             </a>
                         </li>
@@ -1382,6 +1393,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <!--end::Base Scripts -->   
 <!--begin::Page Snippets -->
 <script src="{{asset('js/login.js')}}" type="text/javascript"></script>
+@yield('scripts')
 <!--end::Page Snippets -->
 </body>
 <!-- end::Body -->

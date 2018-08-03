@@ -39,4 +39,10 @@ Route::get('my-posts','PostsController@mypost');
 Route::resource('posts','PostsController');
 //Penjualan
 Route::resource('penjualan','PenjualansController');
+Route::get('penjualan/delete/{id}','PenjualansController@destroy');
+Route::get('penjualandatatable','PenjualansController@penjualandatatable');
+Route::get('penjualanlist','PenjualansController@penjualanlist');
+Route::get('penjualandatatable/{year}/{month}','PenjualansController@selectData');
 });
+//Alternative ng rock 
+//datatables bootstrap 4

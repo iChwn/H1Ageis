@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Penjualan;
+use Yajra\Datatables\Datatables;
+use DB;
 
 class PenjualansController extends Controller
 {
@@ -97,5 +99,42 @@ class PenjualansController extends Controller
     {
         Penjualan::destroy($id);
         return redirect()->back()->with('alert-danger','Berhasil Menghapus Data!');
+    }
+
+    public function penjualandatatable()
+    {
+        return view ('Penjualan.indexjs');
+    }
+
+    public function penjualanlist()
+    {
+        return Datatables::of(Penjualan::all())
+        ->addColumn('test',function($this_model){
+            return '<a class="btn btn-primary btn-sm" href="penjualan/'.$this_model->id.'/edit">Edit</a>';
+        })
+        ->addColumn('action',function($this_model){
+            return '<a class="btn btn-primary btn-sm" href="penjualan/delete/'.$this_model->id.'">Delete</a>';
+        })
+        ->make(true);
+    }
+
+    //Chart
+    public function selectData($year,$month)
+    {
+        $calendar = cal_days_in_month(CAL_GREGORIAN, $month, $year);
+        $cat_data = array();
+        for($i=1;$i<=$calendar;$i++){
+            $tgl = $year.'-'.$month.'-'.($i+00);
+            $cat_data[] = $this->countByDay($year,$month,$tgl);
+        }
+
+        return $cat_data;
+   
+
+    }
+    public function countByDay($year,$month,$tgl)
+    {
+        $this_ = Penjualan::whereYear('tanggal',$year)->whereMonth('tanggal',$month)->where('tanggal',$tgl)->count();
+        return $this_;
     }
 }

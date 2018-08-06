@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Penjualan;
 use Yajra\Datatables\Datatables;
 use DB;
+use App\Charts\PenjualansChart;
 
 class PenjualansController extends Controller
 {
@@ -113,12 +114,13 @@ class PenjualansController extends Controller
             return '<a class="btn btn-primary btn-sm" href="penjualan/'.$this_model->id.'/edit">Edit</a>';
         })
         ->addColumn('action',function($this_model){
-            return '<a class="btn btn-primary btn-sm" href="penjualan/delete/'.$this_model->id.'">Delete</a>';
+            return '<a class="btn btn-primary btn-sm" href="'.route('penjualan.destroy', $this_model->id).'">Delete</a>
+            ';
         })
         ->make(true);
     }
 
-    //Chart
+    //ChartJS
     public function selectData($year,$month)
     {
         $calendar = cal_days_in_month(CAL_GREGORIAN, $month, $year);
@@ -131,6 +133,28 @@ class PenjualansController extends Controller
     }
     
     public function countByDay($year,$month,$tgl)
+    {
+        $this_ = Penjualan::whereYear('tanggal',$year)->whereMonth('tanggal',$month)->where('tanggal',$tgl)->count();
+        return $this_;
+    }
+
+    //COnsoleTvsChart
+    public function chart($year,$month)
+    {
+        $data = Penjualan::all();
+        $calendar = cal_days_in_month(CAL_GREGORIAN, $month, $year);
+        $cat_data = array();
+        for($i=1;$i<=$calendar;$i++){
+            $tgl = $year.'-'.$month.'-'.($i+00);
+            $cat_data[] = $this->getByMonth($year,$month,$tgl);
+        }
+        $chart = new PenjualansChart;
+        $chart->dataset('Sample','line',$cat_data)
+        -> options(['borderColor'=>'#ff0000']);
+        return view('Penjualan.index',['chart'=>$chart])->with(compact('data'));
+    }
+
+    public function getByMonth($year,$month,$tgl)
     {
         $this_ = Penjualan::whereYear('tanggal',$year)->whereMonth('tanggal',$month)->where('tanggal',$tgl)->count();
         return $this_;

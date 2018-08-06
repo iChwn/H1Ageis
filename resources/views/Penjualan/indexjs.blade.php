@@ -82,18 +82,20 @@
 					</div>
 				</div>
 			</div>
-			<table class="table" id="table_penjualan">
-				<thead>
-					<tr>
-						<th>NO</th>
-						<th>Penjualan</th>
-						<th>Tanggal</th>
-						<th>Edit</th>
-						<th>Delete</th>
-					</tr>
-				</thead>
-			</table>
-
+			<center>
+				<table class="table" id="table_penjualan">
+					<thead>
+						<tr>
+							<th>NO</th>
+							<th>Penjualan</th>
+							<th>Tanggal</th>
+							<th>Edit</th>
+							<th>Delete</th>
+						</tr>
+					</thead>
+				</table>
+			</center>
+			
 			<div class="col-md-4">
 				<label>
 					Masukan Tahun dan Bulan

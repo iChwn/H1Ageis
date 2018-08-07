@@ -1,5 +1,5 @@
 <?php
-
+use App\Events\TaskEvent;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -49,3 +49,12 @@ Route::get('penjualandatatable/{year}/{month}','PenjualansController@selectData'
 //Alternative ng rock 
 //datatables bootstrap 4
 Route::get('testchart','PenjualansController@testchart');
+
+//Sample Pusher
+Route::get('/pusher', function() {
+    event(new App\Events\TaskEvent('Hi there Pusher!'));
+    return "Event has been sent!";
+});
+Route::get('/pusher-data', function() {
+    return view('listen');
+});

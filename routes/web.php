@@ -48,3 +48,4 @@ Route::get('penjualandatatable/{year}/{month}','PenjualansController@selectData'
 });
 //Alternative ng rock 
 //datatables bootstrap 4
+Route::get('testchart','PenjualansController@testchart');

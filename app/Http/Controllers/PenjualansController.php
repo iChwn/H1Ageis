@@ -159,4 +159,9 @@ class PenjualansController extends Controller
         $this_ = Penjualan::whereYear('tanggal',$year)->whereMonth('tanggal',$month)->where('tanggal',$tgl)->count();
         return $this_;
     }
+
+    public function testchart()
+    {
+        return view('test');
+    }
 }

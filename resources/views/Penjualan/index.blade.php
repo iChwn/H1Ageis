@@ -78,26 +78,8 @@
 					<label>
 						Masukan Tahun dan Bulan
 					</label><p>
-					<div class="btn-group dropup">
-						<button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							Dropup button
-						</button>
-						<div class="dropdown-menu">
-							<a class="dropdown-item" href="{{URL('admin/penjualan/2015/1')}}">
-								2015
-							</a>
-							<a class="dropdown-item" href="{{URL('admin/penjualan/2016/1')}}">
-								2016
-							</a>
-							<a class="dropdown-item" href="{{URL('admin/penjualan/2017/1')}}">
-								2017
-							</a>
-							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" href="{{URL('admin/penjualan/2018/1')}}">
-								2018
-							</a>
-						</div>
-					</div>
+					<form class="m-form m-form--fit m-form--label-align-right" action="" method="post">
+					 
 					<select class="btn btn-success dropdown-toggle" name="bulan">
 						<option>Bulan</option>
 						<option value="01">Januari</option>
@@ -113,6 +95,7 @@
 						<option value="11">November</option> 
 						<option value="12">Desember</option> 
 					</select>
+					</form>
 				</div>
 				@if(isset($chart))
 				<div>{!! $chart->container() !!}</div>
@@ -150,7 +133,7 @@
 		</div>
 	</div>
 	<script type="text/javascript" src="{{asset('js/jquery-3.3.1.min.js')}}"></script>
-	<script type="text/javascript" src="{{asset('js/Chwart.min.js')}}"></script>
+	<script type="text/javascript" src="{{asset('js/Chart.min.js')}}"></script>
 	<script type="text/javascript">
 		$('[name=tahun]').change(function(){
 			$('[name=bulan]').val('01').trigger('change');
